@@ -7,7 +7,6 @@ exports.up = function(knex) {
     table.string('item_image').notNullable();
     table.timestamps(true, true);
   })
-
 };
 
 exports.down = function(knex) {
