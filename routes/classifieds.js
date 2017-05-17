@@ -21,6 +21,22 @@ router.get('/:id', (req, res, next) => {
     .then((classifieds) => {
       res.send(classifieds[0]);
     });
-})
+});
+
+router.post('/', (req, res, next) => {
+  let body = req.body;
+
+  knex('classifieds')
+    .returning(['id', 'title', 'description', 'price', 'item_image'])
+    .insert({
+      title: body.title,
+      description: body.description,
+      price: body.price,
+      item_image: body.item_image
+    })
+    .then((classified) => {
+      res.send(classified[0])
+    });
+});
 
 module.exports = router;
