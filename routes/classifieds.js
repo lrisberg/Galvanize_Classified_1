@@ -34,8 +34,26 @@ router.post('/', (req, res, next) => {
       price: body.price,
       item_image: body.item_image
     })
-    .then((classified) => {
-      res.send(classified[0])
+    .then((classifieds) => {
+      res.send(classifieds[0])
+    });
+});
+
+router.patch('/:id', (req, res, next) => {
+  let id = req.params.id;
+  let body = req.body;
+
+  knex('classifieds')
+    .returning(['id', 'title', 'description', 'price', 'item_image'])
+    .where('id', id)
+    .update({
+      title: body.title,
+      description: body.description,
+      price: body.price,
+      item_image: body.item_image
+    })
+    .then((classifieds) => {
+      res.send(classifieds[0])
     });
 });
 
